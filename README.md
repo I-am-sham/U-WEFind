@@ -1,2 +1,0 @@
-# U-WEfind
-location application
