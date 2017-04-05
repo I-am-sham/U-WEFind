@@ -88,7 +88,7 @@ function recoverycheck($email){
 				$mail->addAddress($email);     // Add a recipient 
 				$mail->isHTML(true);                                  // Set email format to HTML
 				$mail->Subject = 'Password Recovery';
-				$mail->Body = '<h2>U-WEfind</h2><h4>To reset your password, click on the link below.</h4><br><a href="http://u-wefind.herokuapp.com/templates/newpass.php?email='.urlencode($email).'">U-WEfind</a></br>';
+				$mail->Body = '<h2>U-WEfind</h2><h4>To reset your password, click on the link below.</h4><br><a href="https://u-wefind.herokuapp.com/templates/newpass.php?email='.urlencode($email).'">U-WEfind</a></br>';
 
 				if(!$mail->send()) {
 					return false;	
