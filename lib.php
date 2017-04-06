@@ -3,7 +3,7 @@ include "course.php";
 if(!session_id()) session_start();//If session is not started start session
 
 function getDBConnection(){
-	try{ 
+	try{
 		$db = new mysqli("sql10.freemysqlhosting.net","sql10166023","fNe6cp3r6y","sql10166023");
 		//$db = new mysqli("localhost","root","","ifinddb");
 		if ($db == null && $db->connect_errno > 0)return null;
@@ -147,8 +147,6 @@ function verifyToken($token){
 	$res = $db->query($sql);
 	if($res && $row = $res->fetch_assoc()){
 		if($token=$row['token']){
-			echo $token;
-			echo $row['token'];
 			return true;
 		}
 	}
