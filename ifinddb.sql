@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2017 at 02:46 AM
+-- Generation Time: Apr 06, 2017 at 01:15 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -142,6 +142,21 @@ INSERT INTO `faculty_department` (`facultyId`, `departmentId`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pending_users`
+--
+
+DROP TABLE IF EXISTS `pending_users`;
+CREATE TABLE IF NOT EXISTS `pending_users` (
+  `tokenid` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(20) NOT NULL,
+  `token` varchar(200) NOT NULL,
+  PRIMARY KEY (`tokenid`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `room`
 --
 
@@ -183,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `departmentId` varchar(20) NOT NULL,
   PRIMARY KEY (`userId`),
   KEY `departmentId` (`departmentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5008 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5011 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -195,7 +210,8 @@ INSERT INTO `user` (`userId`, `fname`, `lname`, `email`, `password`, `department
 (5004, 'Reza', 'Mohammed', 'reza@gmail.com', '3d4edf3cd249de9f27898c5b763e4b9a3e7aaa55', 'DCIT'),
 (5005, 'rice', 'summer', 'rice@gmail.com', '1ba95c1c3aacb805f7ee7b33dd8ba38657ea1bb4', 'DCIT'),
 (5006, 'Saffiyah', 'Doolan', 'saffiyahdoolan@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'DCIT'),
-(5007, 'Shamar', 'Culzac', 'shamar@gmail.com', '99345ce680cd3e48acdb9ab4212e4bd9bf9358b7', 'DCIT');
+(5007, 'Shamar', 'Culzac', 'shamarculzac@gmail.com', '99345ce680cd3e48acdb9ab4212e4bd9bf9358b7', 'DCIT'),
+(5010, 'Sade', 'Lopez', 'sad3@gmail.com', '99345ce680cd3e48acdb9ab4212e4bd9bf9358b7', 'DCIT');
 
 -- --------------------------------------------------------
 
@@ -249,6 +265,12 @@ ALTER TABLE `course`
 ALTER TABLE `faculty_department`
   ADD CONSTRAINT `faculty_department_ibfk_1` FOREIGN KEY (`facultyId`) REFERENCES `faculty` (`facultyId`),
   ADD CONSTRAINT `faculty_department_ibfk_2` FOREIGN KEY (`departmentId`) REFERENCES `department` (`departmentId`);
+
+--
+-- Constraints for table `pending_users`
+--
+ALTER TABLE `pending_users`
+  ADD CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`);
 
 --
 -- Constraints for table `room`
