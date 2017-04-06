@@ -4,7 +4,8 @@ if(!session_id()) session_start();//If session is not started start session
 
 function getDBConnection(){
 	try{ 
-		$db = new mysqli("sql10.freemysqlhosting.net","sql10166023","fNe6cp3r6y","sql10166023");
+		//$db = new mysqli("sql10.freemysqlhosting.net","sql10166023","fNe6cp3r6y","sql10166023");
+		$db = new mysqli("localhost","root","","ifinddb");
 		if ($db == null && $db->connect_errno > 0)return null;
 		return $db;
 	}catch(Exception $e){ } 
@@ -18,7 +19,7 @@ function saveUser($fname, $lname, $departmentId, $email, $password){
 	$db = getDBConnection();
 	if ($db != NULL){
 		$res = $db->query($sql);
-		if ($res && $db->insert_id > 0){
+			if ($res && $db->insert_id > 0){
 			$id = $db->insert_id;
 			$_SESSION["user"] = $fname;
 			$_SESSION["id"] = $id;
@@ -64,7 +65,7 @@ function checkEmail($email){
 }
 
 function recoverycheck($email){
-	$sql = "SELECT email FROM `user` where `email`='$email'";
+	$sql = "SELECT * FROM `user` where `email`='$email'";
 	//print($email);
 	$db = getDBConnection();
 	//print_r($db);
@@ -72,6 +73,8 @@ function recoverycheck($email){
 		$res = $db->query($sql);
 		if ($res && $row = $res->fetch_assoc()){
 			if($row['email'] == $email){
+				$userId = $row['userId'];
+				$token = tokenizer($userId, $email);
 				require( 'telegram/PHPMailer/PHPMailerAutoload.php' );
 				$mail = new PHPMailer;
 				$email = $email;
@@ -88,7 +91,7 @@ function recoverycheck($email){
 				$mail->addAddress($email);     // Add a recipient 
 				$mail->isHTML(true);                                  // Set email format to HTML
 				$mail->Subject = 'Password Recovery';
-				$mail->Body = '<h2>U-WEfind</h2><h4>To reset your password, click on the link below.</h4><br><a href="http://u-wefind.herokuapp.com/templates/newpass.php?email='.urlencode($email).'">U-WEfind</a></br>';
+				$mail->Body = '<h2>U-WEfind</h2><h4>To reset your password, click on the link below.</h4><br><a href="https://localhost/IFind/templates/newpass.php?token='.$token.' &email='.$email.'">U-WEfind</a></br>';
 
 				if(!$mail->send()) {
 					return false;	
@@ -113,12 +116,55 @@ function change($email, $newPass){
 	if ($rec && $row = $rec->fetch_assoc()){
 		if($row['password']!=$password){
 			$sql = "UPDATE `user` SET `password` = '$password' WHERE `email`='$email'";
+			//oneTime($token);
 			$res = $db->query($sql);
 			return true;
 		}
 	}		
 	}
 	return false;
+}
+
+function tokenizer($userId, $email){
+	$db = getDBConnection();
+	$token = sha1(uniqid($email, true));
+	$sql = "INSERT INTO pending_users (userId, token) VALUES ('$userId', '$token');";	
+	$id = -1;
+	if($db!=null){
+		$res = $db->query($sql);
+		if ($res && $db->insert_id > 0){
+			$id = $db->insert_id;
+		}
+		$db->close();
+	}
+	return $token;
+}
+
+function verifyToken($token){
+	$db = getDBConnection();	
+	$sql = "SELECT token FROM `pending_users` WHERE `token`= '$token';";
+	if($db!=NULL){
+	$res = $db->query($sql);
+	if($res && $row = $res->fetch_assoc()){
+		if($token=$row['token']){
+			echo $token;
+			echo $row['token'];
+			return true;
+		}
+	}
+	$db->close();
+	}
+	return false;
+}
+
+function oneTime($token){
+	$db = getDBConnection();
+	$sql = "DELETE FROM pending_users WHERE token = '$token'";
+
+	if ($db != null){
+		$res = $db->query($sql);
+		$db->close();
+	}
 }
 
 function getAllCourses(){

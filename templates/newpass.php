@@ -1,9 +1,13 @@
 <?php
 include "../lib.php";
 
-if(isset($_GET['email'])){
-	$email = $_GET['email'];
-}
+	$token = $_GET['token'];
+	$ans = verifyToken(htmlspecialchars($token));
+
+		if($ans == false){
+			header("Location:blank.php");
+		}
+	$email = $_GET["email"];
 ?>
 
 <!doctype html>
@@ -108,3 +112,7 @@ if(isset($_GET['email'])){
 
 </body>
 </html>
+
+<?php
+	oneTime($token);
+	?>
