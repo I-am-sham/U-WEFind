@@ -1,13 +1,3 @@
-<?php
-if(!isset($_SESSION)){
-  session_start();
-}
-if(empty($_SESSION)){
-	header('Location: ../');
-	exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +9,7 @@ if(empty($_SESSION)){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Timetable</title>
+    <title>How it works?</title>
 
 <!-- Custom CSS -->
 <link href="../css/logo-nav.css" rel="stylesheet">
@@ -27,19 +17,11 @@ if(empty($_SESSION)){
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet">	
-<style>
-	th, tr{
-		overflow-wrap:break-word;
-	}
 
-	#saveT, #add, #del{
-		margin-bottom: 5px;
-	}
-</style>
 </head>
 
-<body onload="retrieveAllDepartments();">
-	
+<body>
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -110,102 +92,54 @@ if(empty($_SESSION)){
         </div>
     </header>
 	
-	
-				
-	<!-- Log in -->
-	<div class="container" >
-		<div class="row">   
-            <div class="col-md-12">
-                <h2>Welcome <?php echo $_SESSION["user"];?></h2>
-                <br>
-				
-				<!-- Adding user courses -->
-	<div class ="row" style="display:none" id="addCourseForm">
-		<div class ="col-md-6">
-		<form name="courseForm" enctype="multipart/form-data" class="form-horizontal" method="POST" action="timetable.php" onsubmit="return addCourse();">
-			<fieldset>
-			<legend style="text-align:center">Add Course</legend>
-			
-			<div class="form-group">
-			<label class="col-md-4 control-label" for="departmentId">Department</label> 
-				<div class="col-md-6">
-					<select class="form-control" name="departmentId" id="departmentId" onchange="clearCourse(); retrieveAllDeptCourses(this.value);">
-						<option value="0">Choose Department</option>
-					</select>
-				</div>
-				
-			<label class="col-md-4 control-label" for="courseCode">Course</label> 
-				<div class="col-md-6">
-				<select class="form-control" name="courseCode" id="courseCode">
-					<option value="0">Choose Course</option>
-				</select>
-				</div>
-			</div>
-			
-			<div class="form-group">
-			<label class="col-md-4 control-label" for="Add"></label>
-			<div class="btn-group">
-				<button type="submit" id="addBtn" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Add</button>
-				<button type="button" onclick ="clearCourse(); hideCourseForm();" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-			</div>
-			</div>
-			</fieldset>
-		</form>
-	</div>
-	</div>
-	
-	<!-- Delete user courses -->
-	<div class ="row" style="display:none" id="deleteCourseForm">
-		<div class ="col-md-6">
-		<form name="deleteCourseForm" enctype="multipart/form-data" class="form-horizontal" method="POST" action="timetable.php">
-			<fieldset>
-			<legend style="text-align:center">Delete Course</legend>
-			
-			<div class="form-group">	
-			<label class="col-md-4 control-label" for="courseCde">Course</label> 
-				<div class="col-md-6">
-				<select class="form-control" name="courseCde" id="courseCde">
-					<option value="0">Choose Course</option>
-				</select>
-				</div>
-			</div>
-			
-			<div class="form-group">
-			<label class="col-md-4 control-label" for="delete"></label>
-			<!-- <div class="col-md-4"> -->
-			<div class="btn-group">
-				<button type="button" id="addBtn" onclick="deleteCourse();" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-				<button type="button" onclick ="clearCourse(); hideDeleteForm();" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-			</div>
-			<!-- </div> -->
-			</div>
-			</fieldset>
-		</form>
-	</div>
-	</div>
-				
-				<div class ="row">
-					<div class ="form-group" style="margin-left:15px">
-						<button id="add" type="button" onclick ="clearFields(); AddCourseForm();" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Add Courses</button>
-						<button id="del" type="button" onclick ="clearFields(); showDeleteForm(); getUserCourses();" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span> Delete Courses</button>
-						<button id="saveT" type="button" name="save"  class="btn btn-info"><span class="glyphicon glyphicon-download"></span> Download Timetable</button>
-					</div>
-				</div>
-				
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Personal Timetable</h3>
-					</div>
-						<?php 
-							include "../lib.php";
-    						genTimetable(); //filling courses array                 					
-						?>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-    <!-- /.container -->
+</br></br>
+
+<div class="container-fluid" style="text-align:center">
+  <h3><a href="#add" data-toggle="collapse"><span class="glyphicon glyphicon-menu-down"></span>How do you add a course?</a></h3>
+  <div id="add" class="collapse">
+	<h4>To add a new course, click on "add course" button.</h4></br>
+	<img src="../images/add course.jpg" id="add" alt=""></br></br><hr>
+	<h4>Then choose your department.</h4></br>
+	<img src="../images/add course 2.jpg" id="add" alt=""></br></br><hr>
+	<h4>Then choose your course.</h4></br>
+	<img src="../images/add course 3.jpg" id="add" alt=""></br></br><hr>
+	<h4>Then click add.</h4></br>
+	<img src="../images/add course 4.jpg" id="add" alt="">
+  </div>
+	<hr>
+  <h3><a href="#delete" data-toggle="collapse"><span class="glyphicon glyphicon-menu-down"></span>How do you delete a course?</a></h3>
+  <div id="delete" class="collapse">
+	<h4>To delete a course, click on "delete course" button.</h4></br>
+	<img src="../images/delete1.jpg" id="delete" alt=""></br></br><hr>
+	<h4>Then choose your course.</h4></br>
+	<img src="../images/delete2.jpg" id="delete" alt=""></br></br><hr>
+	<h4>Then click delete.</h4></br>
+	<img src="../images/delete3.jpg" id="delete" alt="">
+  </div>
+  	<hr>
+  <h3><a href="#download" data-toggle="collapse"><span class="glyphicon glyphicon-menu-down"></span>How do you download your timetable?</a></h3>
+  <div id="download" class="collapse">
+	<h4>To download timetable, click on "download timetable" button.</h4></br>
+	<img src="../images/download.jpg" id="dpwnload" alt=""></br></br>
+	<h4>Your download will begin shortly.</h4>
+  </div>
+  	<hr>
+  <h3><a href="#search" data-toggle="collapse"><span class="glyphicon glyphicon-menu-down"></span>How do you search for a room?</a></h3>
+  <div id="search" class="collapse">
+	<h4>To find location of a room, click on "search classroom".</h4></br>
+	<img src="../images/search1.jpg" id="search" alt=""></br></br><hr>
+	<h4>Then type desired room name in search bar.</h4></br>
+	<img src="../images/search2.png" id="search" alt=""></br></br><hr>
+	<h4>Then click on search button.</h4></br>
+	<img src="../images/search3.jpg" id="search" alt=""></br></br>
+	<h3 style="text-align:center">OR</h3></br></br>
+	<h4>If table is populated, click on desired course room in cell of your timetable.</h4></br>
+	<img src="../images/search4.jpg" id="search" alt="">
+  </div>
+</div>
+
+  
+      <!-- /.container -->
 	<div class="container">
 		<hr>
         <!-- Footer -->
@@ -219,8 +153,8 @@ if(empty($_SESSION)){
         </footer>
 		
 	</div>	
-	
 
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 	
 <script src="../js/main.js"></script>
@@ -234,7 +168,7 @@ if(empty($_SESSION)){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
 <script src="../js/ie10-viewport-bug-workaround.js"></script>	
-
 </body>
-
 </html>
+
+

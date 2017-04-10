@@ -79,6 +79,9 @@ $GPS=retrieveGPS($roomID);
                     <li>
                         <a href="#">About</a>
                     </li>
+					<li>
+						<a href="instructions.php">How it works?</a>
+					</li>
                     <li>
 						<!-- <button type="button" onclick="showSearchBar();" class="btn btn-info">Search Classroom</button> -->
 						<a id="showSearchBar" href="#" onclick="showSearchBar(); return false;">Search Classroom</a>
