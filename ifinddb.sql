@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2017 at 12:49 AM
+-- Generation Time: Apr 11, 2017 at 03:46 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -156,8 +156,8 @@ CREATE TABLE `room` (
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 113', 'G', 'https://anyplace.cs.ucy.ac.cy/viewer?buid=building_857058eb-86c3-4156-8b9d-9e211ccfd5e4_1489534131482&floor=0&selected=poi_af926b1f-2abf-4b48-be2e-d0996415ad3a', '../images/FST 113.jpg', 100);
-INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 114', 'G', 'https://anyplace.cs.ucy.ac.cy/viewer?buid=building_857058eb-86c3-4156-8b9d-9e211ccfd5e4_1489534131482&floor=0&selected=poi_3131739d-fabe-49bf-95ce-67f9afafd38f"', '../images/FST 114.jpg', 100);
+INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 113', 'G', 'https://goo.gl/AIsH49', '../images/FST 113.jpg', 100);
+INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 114', 'G', 'https://goo.gl/1vgWyl', '../images/FST 114.jpg', 100);
 INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 212', '1', 'https://goo.gl/xKZ7xU', '', 100);
 INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 213', '1', 'https://goo.gl/mzfOOY', '', 100);
 INSERT INTO `room` (`roomId`, `floor`, `url`, `entrance`, `buildingId`) VALUES('FST 214', '1', 'https://goo.gl/619wiy', '', 100);
