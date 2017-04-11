@@ -22,12 +22,14 @@ body {
 	
 }
 
+
 @media(max-width:248px) {
 	.business-header{
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
 	}
+
 }
 .business-header {
     height: 270px;
@@ -119,7 +121,7 @@ body {
 
 }
 
-@media(min-width: 400px) and (max-width: 991px){
+@media(min-width: 481px) and (max-width: 991px){
     #signup-hd2{
     padding-left: 0px;
     padding-right: 0px;
@@ -139,8 +141,16 @@ body {
     padding-right: 20px;
 }
 
+#logo2 {
+    height: 125px;
+    position: relative;
+    display: -webkit-box;
+    margin-left: auto;
+    margin-right: auto;
 }
-@media(max-width: 399px){
+
+}
+@media(min-width: 381px) and (max-width: 480px){
     #signup-hd2{
     padding-left: 0px;
     padding-right: 0px;
@@ -172,9 +182,21 @@ body {
     background-size: 100% 100%;
 
 }
+
+#logo2 {
+        height: 125px;
+        width: 100%;
+    }
+
 }
 
-@media(max-width: 266px){
+@media(max-width: 240px){
+    #logo {
+        width: 100%;
+    }
+}
+
+@media(min-width: 10px) and (max-width: 380px){
     #signup-hd2{
     padding-left: 0px;
     padding-right: 0px;
@@ -183,6 +205,7 @@ body {
     margin-right: auto;
     width:365px;
 }
+
 
 .signup-header1{
 	margin-top: 0px;
