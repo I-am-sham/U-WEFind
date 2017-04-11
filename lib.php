@@ -389,8 +389,8 @@ $courses = array( //associative 2D array using Days and Time as the indices
     $time_intervals=['8am-9am','9am-10am','10am-11am','11am-12pm','12pm-1pm','1pm-2pm','2pm-3pm','3pm-4pm','4pm-5pm','5pm-6pm','6pm-7pm','7pm-8pm'];//index array by default
 	$i=0;
     echo "<table class='table table-hover table-responsive' id='dev-table' style='table-layout:fixed'";
-    echo "<thead><tr><th>&nbsp;</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr></thead><tbody>";
-	
+    echo "<thead><tr><th>&nbsp;</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead><tbody>";
+
 	foreach($courses as $list => $times) //printing timetable row by row
 	{
 		echo "<tr><td>".$time_intervals[$i++]."</td>"; //i need to iterate all these times
