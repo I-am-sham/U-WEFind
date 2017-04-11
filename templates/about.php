@@ -1,12 +1,3 @@
-<?php
-if(!isset($_SESSION)){session_start();}
-include "../lib.php";
-$roomID = $_GET['roomID']; //retrieving roomid from timetable and storing it in variable roomID
-$url=retrieveURL($roomID); //retrieving location of classroom
-$entrance=getImg($roomID);
-//echo $url;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +18,7 @@ $entrance=getImg($roomID);
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet">	
 </head>
-	
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -95,29 +86,22 @@ $entrance=getImg($roomID);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                </div>
+				 </div>
             </div>
         </div>
     </header>
 	
-	
-				
-	<!-- Log in -->
-	<div class="container" >
-		<div class="row">   
-            <div class="col-md-12">
-                <h2>Map of <a tabindex="0" class="btn" rel="popover" data-trigger="focus" data-img="<?php echo $entrance?>"><h4><?php echo $roomID;?></h4></a></h2>
-                <br>
-				
-				<div class="panel panel-primary">
-					<iframe width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" src="<?php echo $url?>"></iframe>
-						
-				</div>
-			</div>
-		</div>
+	<div class="container" style="text-align:justify">
+	</br></br><h4>
+	<p>U-WE Find is a location based web application that is used to help students and staff of the University of the West Indies, St. Augustine find their classrooms.</p>
+	<p>Unlike physical maps, this application incorporates Anyplace mapping API along with a timetable to provide an easy, manoeuvrable and convenient feature that can be accessed with internet connection.
+	   It also accommodates for the changes in a user’s timetable with respect to cancellation of classes.
+	   A user can also download his/her timetable as a PDF file.</p>
+	</h4>
 	</div>
 	
-    <!-- /.container -->
+	
+	    <!-- /.container -->
 	<div class="container">
 		<hr>
         <!-- Footer -->
@@ -131,6 +115,7 @@ $entrance=getImg($roomID);
         </footer>
 		
 	</div>	
+	
 	
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>		

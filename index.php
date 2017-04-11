@@ -44,6 +44,14 @@ $app->get("/courses", function(Request $request, Response $response){
 	return $response;
 });
 
+$app->post("/attempt", function(Request $request, Response $response){
+	echo ("hello!");
+	$attempts = prodAttempt();
+	var_dump($attempts);
+	//$response = $response->withJson($attempts);
+	//return $response;
+});
+
 $app->get("/unique/{id}", function(Request $request, Response $response){
 	$email = $request->getAttribute('id');
 	$res = checkEmail($email);
@@ -160,10 +168,13 @@ $app->post("/login", function(Request $request, Response $response)use ($app){
 	$email = $post['email'];
 	$password = $post['password'];
 	$res = checkLogin($email, $password);
-	if ($res){
+	if ($res===true){
 		$response = $response->withStatus(201);
 		$response = $response->withJson(array("loginstatus"=> true));
-	} else {
+	} else if($res>2){
+		$response = $response->withJson(array("exceed"=>3));
+	}
+	else{
 		$response = $response->withJson(400);
 	}
 	return $response;

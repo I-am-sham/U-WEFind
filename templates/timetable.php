@@ -59,7 +59,7 @@ if(empty($_SESSION)){
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="about.php">About</a>
                     </li>
 					<li>
 						<a href="instructions.php">How it works?</a>

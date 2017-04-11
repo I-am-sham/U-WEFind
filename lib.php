@@ -30,22 +30,59 @@ function saveUser($fname, $lname, $departmentId, $email, $password){
 }
 
 function checkLogin($email, $password){
-	$password = sha1($password);
-	$sql = "SELECT * FROM `user` where `email`='$email'";
-	//print($email);
 	$db = getDBConnection();
-	//print_r($db);
-	if($db != NULL){
-		$res = $db->query($sql);
-		if ($res && $row = $res->fetch_assoc()){
-			if($row['password'] == $password){
-				$_SESSION["user"] = $row['fname'];
-				$_SESSION["id"] = $row['userId'];
-				return true;
+
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$sql = "SELECT * FROM `user_attempts` WHERE ip = '$ip'";
+	if($db!=NULL){
+		$results =$db->query($sql);
+		$row = $results->fetch_assoc();
+			if($row['attempt_num']>2){
+				return $row['attempt_num'];
 			}
-		}
+				$password = sha1($password);
+				$sql = "SELECT * FROM `user` where `email`='$email'";
+
+				$res = $db->query($sql);
+				if ($res && $row = $res->fetch_assoc()){
+					if($row['password'] == $password){
+						$_SESSION["user"] = $row['fname'];
+						$_SESSION["id"] = $row['userId'];
+						$sql = "DELETE FROM `user_attempts` WHERE `ip`='$ip'";
+						$db->query($sql);
+						return true;
+					}
+				}
+				$db->close();
 	}
 	return false;
+}
+
+function prodAttempt(){
+	$db = getDBConnection();
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$count = 0;
+	//var_dump($count);
+	if($db!=NULL){
+		$sql = "SELECT * FROM `user_attempts` WHERE ip = '$ip'";
+		$res = $db->query($sql);
+		$row = $res->fetch_assoc();
+			if($row['ip']==null){
+				++$count;
+				$sql = "INSERT INTO `user_attempts`(`ip`,`attempt_num`)VALUES('$ip', '$count')";
+				$res = $db->query($sql);
+				//return $count;
+			}
+			if($row['ip']==$ip){
+				$sql = "UPDATE `user_attempts` SET `attempt_num` = attempt_num + 1 WHERE ip = '$ip'";
+				$res = $db->query($sql);
+				//$row = $res->fetch_assoc();
+				//return $row['attempt_num']; 
+			}
+		
+	$db->close();
+	}
+	//return $count;
 }
 
 function checkEmail($email){

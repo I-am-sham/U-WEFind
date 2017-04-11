@@ -214,12 +214,18 @@ function login(){
 				confirmButtonText: "Ok",   
 				closeOnConfirm: false
         },
-		function(){
-			window.location.href = 'templates/timetable.php';
-		});
-    }
-	else{
-		swal("Incorrect Login", "Try Again", "error")
+			function(){
+				window.location.href = 'templates/timetable.php';
+			});
+		}
+		else if(res.exceed){
+			swal("Login attempts exceeded", "Try again in 24 hours", "error")
+		}
+		else{
+			$.post("index.php/attempt");
+			//alert('hello');
+			swal("Incorrect Login", "Try Again", "error")
+		
 	}
 	},"json");
     return false;
