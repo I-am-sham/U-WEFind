@@ -91,7 +91,8 @@ function recoverycheck($email){
 				$mail->addAddress($email);     // Add a recipient 
 				$mail->isHTML(true);                                  // Set email format to HTML
 				$mail->Subject = 'Password Recovery';
-				$mail->Body = '<h2>U-WEfind</h2><h4>To reset your password, click on the link below.</h4><br><a href="https://localhost/IFind/templates/newpass.php?token='.$token.' &email='.$email.'">U-WEfind</a></br>';
+				$mail->addEmbeddedImage('images/logo.png', 'logo', 'images/logo.png');
+				$mail->Body = '<p><img alt="PHPMailer" height="70" width="140" src="cid:logo"></p><h4>To reset your password, click on the link below.</h4><br><a href="https://localhost/IFind/templates/newpass.php?token='.$token.' &email='.$email.'">U-WEfind</a></br>';
 
 				if(!$mail->send()) {
 					return false;	
